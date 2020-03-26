@@ -1,6 +1,6 @@
 {
-    "username": "<>",
     "token": "<>",
     "zone_id": "<>",
-    "dns_id": "<>"
+    "dns_id": "<>",
+    "ipvX": "<either ipv4 or ipv6>"
 }

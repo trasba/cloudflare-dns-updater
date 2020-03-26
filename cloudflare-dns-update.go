@@ -21,7 +21,15 @@ func main() {
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
-	url := "https://api.ipify.org?format=text"
+	// switch between ipv6 and ipv4
+	var url string
+	if viper.GetString("ipvX")=="ipv6" {
+		url = "https://api6.ipify.org?format=text"
+	} else {
+		url = "https://api.ipify.org?format=text"
+	}
+
+	// get current ip address from ipify
 	fmt.Printf("Getting IP address from  ipify\n")
 	resp, err := http.Get(url)
 	if err != nil {
@@ -35,17 +43,20 @@ func main() {
 	fmt.Printf("IP is:%s\n", ip)
 
 	// Construct a new API object
-	api, err := cloudflare.New(viper.GetString("token"), viper.GetString("username"))
+	// use NewWithAPIToken for use with token and New for use with username + API key
+	api, err := cloudflare.NewWithAPIToken(viper.GetString("token"))
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// get current DNS record from cloudflare
 	cur, err := api.DNSRecord(viper.GetString("zone_id"), viper.GetString("dns_id"))
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(cur.Content)
 
+	// compare values and act accordingly
 	if cur.Content == string(ip) {
 		fmt.Println("record and current IP are identical")
 	} else {
