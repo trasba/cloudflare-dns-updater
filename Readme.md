@@ -46,8 +46,8 @@ nano config.json
 **dns_id:** You need to extract it via the api. Easiest way is using curl. Replace \<use zone_id\> and \<use token\> with the actual values   
 ```
 curl -X GET "https://api.cloudflare.com/client/v4/zones/<use zone_id>/dns_records" \
->      -H "Content-Type:application/json" \
->      -H "Authorization: Bearer <use token>" 
+      -H "Content-Type:application/json" \
+      -H "Authorization: Bearer <use token>" 
 ```
 Now you need to find the dns record you want to use. It might look something like this:  
 ```
