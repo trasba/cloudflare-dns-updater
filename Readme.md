@@ -4,7 +4,7 @@ checking current ip address and update it in cloudflare DNS. Can be used program
 either use the binary or clone the repository and build it yourself
 e.g.
 ```
-git clone https://github.com/trasba/cloudflare-dns-updater.git
+git clone git@github.com:trasba/cloudflare-dns-updater.git
 ```
 get the dependencies
 ```
